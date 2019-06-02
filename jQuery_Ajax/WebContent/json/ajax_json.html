@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html>
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+<title>ajax 01</title>
+<style type="text/css">
+	table{
+		border: 1px solid red;
+	}
+</style>
+<script type="text/javascript">
+var xdata;
+
+	$(function() {
+			$.ajax({
+				url:"json.jsp",
+				type:'POST',
+				dataType :'json',
+				success : function(data) {
+					$('#msg').html('success')
+					xdata = data;				
+					var result='';
+					
+					result+='<table><tr><th>아이디</th></tr>';
+				
+//					$('#result').html('<table>');
+					$('#result').each(function(index, item) {
+						
+						result+=('<tr><td>');
+						result+=data.id;
+						result+=('</td></tr>');
+						
+/*						$(this).html('<tr><td>');
+						$(this).text(data.id);
+						$(this).html('</td></tr>');
+	*/				});
+
+//					$('#result').html('</table>');
+					result+='</table>';
+					$('#result').html(result);
+
+				},
+				//error에는 에러 정보
+				error : function(error, status) {
+					$('#msg').html(error)
+				}
+			});
+	});
+</script>
+
+</head>
+<body>
+	
+	<h1>JSON</h1>
+	<div id="msg"></div>
+	<div id="result"></div>
+	
+</body>
+</html>
